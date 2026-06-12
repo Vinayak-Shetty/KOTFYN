@@ -69,7 +69,16 @@ pipeline {
     post {
         always {
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
-            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/extent-reports/**/*.html,target/surefire-reports/**/*'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/extent-report/**/*,target/extent-reports/**/*,target/surefire-reports/**/*'
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'target/extent-report',
+                reportFiles: 'index.html',
+                reportName: 'Extent Report',
+                reportTitles: 'Extent Report'
+            ])
         }
     }
 }

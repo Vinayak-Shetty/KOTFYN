@@ -98,10 +98,17 @@ ExtentReports are generated under:
 target/extent-reports/<test-name>-<timestamp>/index.html
 ```
 
+In Jenkins, the report is generated under a stable folder:
+
+```text
+target/extent-report/index.html
+```
+
 Jenkins archives:
 
 ```text
-target/extent-reports/**/*.html
+target/extent-report/**/*
+target/extent-reports/**/*
 target/surefire-reports/**/*
 ```
 
@@ -112,6 +119,42 @@ The Extent report includes:
 - Registration business steps
 - Failure error and stack trace
 - Failure screenshot when available
+
+## Viewing Extent Report In Jenkins
+
+Install this Jenkins plugin:
+
+```text
+HTML Publisher
+```
+
+The pipeline publishes the report as:
+
+```text
+Extent Report
+```
+
+After a build completes, open the build and click:
+
+```text
+Extent Report
+```
+
+If the report opens but looks blank or broken, Jenkins may be blocking JavaScript/CSS for archived HTML reports. For local/internal Jenkins only, you can relax the Jenkins Content Security Policy from:
+
+```text
+Manage Jenkins > Script Console
+```
+
+Run:
+
+```groovy
+System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+```
+
+Then refresh the Extent report page.
+
+Note: Disabling CSP is less secure. Use it only on trusted/internal Jenkins instances.
 
 ## Important Manual Step Note
 
@@ -140,4 +183,3 @@ System properties also work:
 ```powershell
 .\mvn.cmd test -Dtest=RegistrationSmokeTest -Dappium.server.url=http://127.0.0.1:4723/
 ```
-

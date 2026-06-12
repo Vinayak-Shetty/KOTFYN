@@ -19,7 +19,11 @@ set "REPORT_ID=%REPORT_ID:~0,60%"
 for /f %%i in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd-HHmmss"') do set "REPORT_TIMESTAMP=%%i"
 
 set "REPORT_TITLE=Kotak Fyn - %REPORT_ID% - %REPORT_TIMESTAMP%"
-set "REPORT_DIR_REL=target\extent-reports\%REPORT_ID%-%REPORT_TIMESTAMP%"
+if defined JENKINS_HOME (
+    set "REPORT_DIR_REL=target\extent-report"
+) else (
+    set "REPORT_DIR_REL=target\extent-reports\%REPORT_ID%-%REPORT_TIMESTAMP%"
+)
 set "REPORT_DIR=%PROJECT_DIR%%REPORT_DIR_REL%"
 set "REPORT_FILE=%REPORT_DIR%\index.html"
 
