@@ -60,6 +60,7 @@ This listener creates one Extent test entry for each TestNG testcase.
 - Creating Extent report instance
 - Setting report name/title
 - Creating output folder
+- Enabling offline mode so Jenkins can load report CSS/JavaScript reliably
 - Managing current testcase report object
 - Flushing report at the end
 
@@ -148,6 +149,14 @@ Jenkins archives reports from:
 target/extent-reports/**/*.html
 ```
 
+Extent Spark is configured with offline mode:
+
+```java
+sparkReporter.config().setOfflineMode(true);
+```
+
+This helps Jenkins render the report UI properly without depending on external CDN assets.
+
 ## Important Notes
 
 - ExtentReports does not automatically read Allure `@Step` annotations.
@@ -155,4 +164,3 @@ target/extent-reports/**/*.html
 - Failure screenshots work only when the Appium driver is available.
 - If test setup fails before driver creation, screenshot may not be available.
 - The report is generated during TestNG execution, not after execution like Allure.
-

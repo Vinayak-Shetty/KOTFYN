@@ -29,6 +29,7 @@ public final class ExtentReportManager {
             sparkReporter.config().setReportName(resolveReportTitle());
             sparkReporter.config().setTheme(Theme.STANDARD);
             sparkReporter.config().setTimelineEnabled(true);
+            sparkReporter.config().setOfflineMode(true);
 
             extentReports = new ExtentReports();
             extentReports.attachReporter(sparkReporter);
