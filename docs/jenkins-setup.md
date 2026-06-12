@@ -156,6 +156,34 @@ Then refresh the Extent report page.
 
 Note: Disabling CSP is less secure. Use it only on trusted/internal Jenkins instances.
 
+### Permanent CSP Fix
+
+This repository includes a Jenkins startup script:
+
+```text
+jenkins/init.groovy.d/disable-html-report-csp.groovy
+```
+
+To install it, open PowerShell as Administrator from the project root and run:
+
+```powershell
+.\jenkins\install-disable-html-report-csp.ps1
+```
+
+Then restart Jenkins:
+
+```powershell
+Restart-Service Jenkins
+```
+
+The script copies the CSP override to:
+
+```text
+%JENKINS_HOME%\init.groovy.d\disable-html-report-csp.groovy
+```
+
+After restart, ExtentReports published by Jenkins should load with proper CSS and JavaScript.
+
 ## Important Manual Step Note
 
 The current `RegistrationSmokeTest` still contains manual steps:
