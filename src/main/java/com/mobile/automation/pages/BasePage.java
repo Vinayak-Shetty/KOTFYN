@@ -1,5 +1,6 @@
 package com.mobile.automation.pages;
 
+import com.mobile.automation.config.ConfigReader;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ScreenOrientation;
@@ -11,14 +12,15 @@ import java.time.Duration;
 
 public class BasePage {
     protected final AndroidDriver driver;
-    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(20);
+    private static final String DEFAULT_WAIT_KEY = "wait.default.seconds";
+    private static final int DEFAULT_WAIT_SECONDS = 20;
 
     protected BasePage(AndroidDriver driver) {
         this.driver = driver;
     }
 
     protected WebElement waitForVisible(By locator) {
-        return waitForVisible(locator, DEFAULT_TIMEOUT);
+        return waitForVisible(locator, timeout(DEFAULT_WAIT_KEY, DEFAULT_WAIT_SECONDS));
     }
 
     protected WebElement waitForVisible(By locator, Duration timeout) {
@@ -27,7 +29,7 @@ public class BasePage {
     }
 
     protected WebElement waitForAnyVisible(By... locators) {
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT)
+        return new WebDriverWait(driver, timeout(DEFAULT_WAIT_KEY, DEFAULT_WAIT_SECONDS))
                 .until(driver -> {
                     for (By locator : locators) {
                         for (WebElement element : driver.findElements(locator)) {
@@ -59,8 +61,12 @@ public class BasePage {
     }
 
     protected WebElement waitForClickable(By locator) {
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT)
+        return new WebDriverWait(driver, timeout(DEFAULT_WAIT_KEY, DEFAULT_WAIT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    protected Duration timeout(String configKey, int defaultSeconds) {
+        return Duration.ofSeconds(ConfigReader.getInt(configKey, defaultSeconds));
     }
 
     protected boolean isDisplayed(By locator) {
@@ -83,12 +89,25 @@ public class BasePage {
         waitForClickable(locator).click();
     }
 
+    protected void tapFirstVisible(By... locators) {
+        waitForAnyVisible(locators).click();
+    }
+
     protected boolean tapIfDisplayed(By locator, Duration timeout) {
         if (!isDisplayed(locator, timeout)) {
             return false;
         }
         driver.findElement(locator).click();
         return true;
+    }
+
+    protected boolean tapFirstIfDisplayed(Duration timeout, By... locators) {
+        for (By locator : locators) {
+            if (tapIfDisplayed(locator, timeout)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected void type(By locator, String value) {

@@ -9,8 +9,8 @@ import java.time.Duration;
 import java.util.List;
 
 public class RegistrationPage extends BasePage {
-    private static final Duration SHORT_TIMEOUT = Duration.ofSeconds(3);
-    private static final Duration LONG_TIMEOUT = Duration.ofSeconds(60);
+    private static final String SHORT_WAIT_KEY = "wait.short.seconds";
+    private static final String LONG_WAIT_KEY = "wait.long.seconds";
 
     private final By registerYourCrnTitle = text("Register your CRN");
     private final By registerNowButton = text("REGISTER NOW");
@@ -76,15 +76,16 @@ public class RegistrationPage extends BasePage {
 
     public boolean isMobileVerificationStarted() {
         waitForAnyVisible(mobileVerificationTitle, smsDeliveredToast, selectCrnTitle, otpTitle);
-        return isDisplayed(mobileVerificationTitle, SHORT_TIMEOUT)
-                || isDisplayed(mobileVerificationMessage, SHORT_TIMEOUT)
-                || isDisplayed(smsDeliveredToast, SHORT_TIMEOUT)
-                || isDisplayed(selectCrnTitle, SHORT_TIMEOUT)
-                || isDisplayed(otpTitle, SHORT_TIMEOUT);
+        Duration shortTimeout = shortTimeout();
+        return isDisplayed(mobileVerificationTitle, shortTimeout)
+                || isDisplayed(mobileVerificationMessage, shortTimeout)
+                || isDisplayed(smsDeliveredToast, shortTimeout)
+                || isDisplayed(selectCrnTitle, shortTimeout)
+                || isDisplayed(otpTitle, shortTimeout);
     }
 
     public boolean isSelectCrnDisplayed() {
-        return isDisplayed(selectCrnTitle, LONG_TIMEOUT)
+        return isDisplayed(selectCrnTitle, longTimeout())
                 && isDisplayed(textContains("Showing CRNs linked with your mobile number"))
                 && isDisplayed(continueButton);
     }
@@ -109,9 +110,9 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean isVerifyCrnDisplayed() {
-        return isDisplayed(verifyCrnTitle, LONG_TIMEOUT)
+        return isDisplayed(verifyCrnTitle, longTimeout())
                 && isAnyDisplayed(
-                LONG_TIMEOUT,
+                longTimeout(),
                 netBankingPasswordField,
                 netBankingPasswordFieldByResourceId,
                 netBankingPasswordLabel,
@@ -134,9 +135,9 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean isOtpDisplayed() {
-        return isDisplayed(otpTitle, LONG_TIMEOUT)
+        return isDisplayed(otpTitle, longTimeout())
                 && isDisplayed(otpDigit1Field)
-                && isDisplayed(resendOtpButton, SHORT_TIMEOUT);
+                && isDisplayed(resendOtpButton, shortTimeout());
     }
 
     public void enterOtp(String otp) {
@@ -144,8 +145,8 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean isMpinDisplayed() {
-        return isDisplayed(mpinTitle, LONG_TIMEOUT)
-                && isAnyDisplayed(LONG_TIMEOUT, mpinField, mpinFieldByResourceId, editText);
+        return isDisplayed(mpinTitle, longTimeout())
+                && isAnyDisplayed(longTimeout(), mpinField, mpinFieldByResourceId, editText);
     }
 
     public void enterMpin(String mpin) {
@@ -153,7 +154,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean isRegistrationSuccessfulDisplayed() {
-        return isDisplayed(registrationSuccessfulTitle, LONG_TIMEOUT) && isDisplayed(signInButton);
+        return isDisplayed(registrationSuccessfulTitle, longTimeout()) && isDisplayed(signInButton);
     }
 
     public boolean waitForRegistrationSuccessfulScreen(int seconds) {
@@ -166,7 +167,7 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean isRegisteredCrnReadyForLogin(String crnText) {
-        boolean loginOptionsDisplayed = isDisplayed(signInUsingTitle, LONG_TIMEOUT)
+        boolean loginOptionsDisplayed = isDisplayed(signInUsingTitle, longTimeout())
                 && isDisplayed(mpinLoginOption)
                 && isDisplayed(netBankingLoginOption);
 
@@ -178,12 +179,20 @@ public class RegistrationPage extends BasePage {
     }
 
     private void openRegistrationLandingIfAlreadyRegistered() {
-        tapIfDisplayed(addNewCrnButton, SHORT_TIMEOUT);
+        tapIfDisplayed(addNewCrnButton, shortTimeout());
     }
 
     private void allowAndroidPermissionIfShown() {
-        tapIfDisplayed(androidAllowButton, SHORT_TIMEOUT);
-        tapIfDisplayed(androidAllowWhileUsingButton, SHORT_TIMEOUT);
+        tapIfDisplayed(androidAllowButton, shortTimeout());
+        tapIfDisplayed(androidAllowWhileUsingButton, shortTimeout());
+    }
+
+    private Duration shortTimeout() {
+        return timeout(SHORT_WAIT_KEY, 3);
+    }
+
+    private Duration longTimeout() {
+        return timeout(LONG_WAIT_KEY, 60);
     }
 
     private void enterDigits(String value) {

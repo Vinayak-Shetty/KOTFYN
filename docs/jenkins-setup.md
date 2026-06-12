@@ -96,7 +96,7 @@ The `Jenkinsfile` supports:
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `TEST_NAME` | `RegistrationSmokeTest` | Test class or single method to run |
+| `TEST_NAME` | `LoginSmokeTest` | Test class or single method to run |
 | `APPIUM_SERVER_URL` | `http://127.0.0.1:4723/` | Appium server URL reachable from Jenkins |
 | `DEVICE_NAME` | `Android Emulator` | Android device name capability |
 | `MANUAL_WAIT_SECONDS` | `30` | Wait time for manual Net Banking, OTP, and MPIN actions |
@@ -104,7 +104,7 @@ The `Jenkinsfile` supports:
 Example single testcase value:
 
 ```text
-RegistrationSmokeTest#TC_SMOKE_REG_001_verifyRegisterYourCrnLandingScreenLoadsSuccessfully
+LoginSmokeTest#TC_SMOKE_LOGIN_001_verifyLoginLandingScreenLoadsSuccessfully
 ```
 
 ## Local Equivalent Command
@@ -237,10 +237,16 @@ Examples:
 | --- | --- |
 | `appium.server.url` | `APPIUM_SERVER_URL` |
 | `device.name` | `DEVICE_NAME` |
+| `wait.short.seconds` | `WAIT_SHORT_SECONDS` |
+| `wait.default.seconds` | `WAIT_DEFAULT_SECONDS` |
+| `wait.login.seconds` | `WAIT_LOGIN_SECONDS` |
+| `wait.long.seconds` | `WAIT_LONG_SECONDS` |
+| `wait.dashboard.seconds` | `WAIT_DASHBOARD_SECONDS` |
+| `login.manual.wait.seconds` | `LOGIN_MANUAL_WAIT_SECONDS` |
 | `registration.manual.wait.seconds` | `REGISTRATION_MANUAL_WAIT_SECONDS` |
 
 System properties also work:
 
 ```powershell
-.\mvn.cmd test -Dtest=RegistrationSmokeTest -Dappium.server.url=http://127.0.0.1:4723/
+.\mvn.cmd test -Dtest=LoginSmokeTest -Dappium.server.url=http://127.0.0.1:4723/ -Dwait.login.seconds=45
 ```

@@ -10,8 +10,8 @@ pipeline {
     parameters {
         string(
             name: 'TEST_NAME',
-            defaultValue: 'RegistrationSmokeTest',
-            description: 'Test class or method, for example RegistrationSmokeTest or RegistrationSmokeTest#TC_SMOKE_REG_001_verifyRegisterYourCrnLandingScreenLoadsSuccessfully'
+            defaultValue: 'LoginSmokeTest',
+            description: 'Test class or method, for example LoginSmokeTest or LoginSmokeTest#TC_SMOKE_LOGIN_001_verifyLoginLandingScreenLoadsSuccessfully'
         )
         string(
             name: 'APPIUM_SERVER_URL',

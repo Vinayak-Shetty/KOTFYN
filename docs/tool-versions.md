@@ -68,6 +68,12 @@ Defined in `src/main/resources/config.properties`.
 | `no.reset` | `true` |
 | `full.reset` | `false` |
 | `new.command.timeout` | `120` |
+| `wait.short.seconds` | `3` |
+| `wait.default.seconds` | `20` |
+| `wait.login.seconds` | `30` |
+| `wait.long.seconds` | `60` |
+| `wait.dashboard.seconds` | `60` |
+| `login.manual.wait.seconds` | `90` |
 
 ## Useful Version Check Commands
 
