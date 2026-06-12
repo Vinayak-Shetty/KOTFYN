@@ -35,6 +35,39 @@ The default project config expects Appium at:
 http://127.0.0.1:4723/
 ```
 
+## Start Jenkins Locally
+
+Jenkins runs as a Windows service, so service commands must be run from an Administrator PowerShell window.
+
+To open Administrator PowerShell from a normal PowerShell terminal:
+
+```powershell
+Start-Process powershell -Verb RunAs
+```
+
+In the new Administrator PowerShell window, start Jenkins:
+
+```powershell
+Start-Service Jenkins
+Get-Service Jenkins
+```
+
+Open Jenkins UI:
+
+```text
+http://localhost:8080
+```
+
+If Jenkins fails to start and shows service exit code `1067`, stale Jenkins runtime marker files may be present after a crash. Run these from Administrator PowerShell:
+
+```powershell
+Stop-Service Jenkins -ErrorAction SilentlyContinue
+Move-Item -LiteralPath "C:\ProgramData\Jenkins\jenkins.pid" -Destination "C:\ProgramData\Jenkins\jenkins.pid.stale" -Force
+Move-Item -LiteralPath "C:\ProgramData\Jenkins\.jenkins\.owner" -Destination "C:\ProgramData\Jenkins\.jenkins\.owner.stale" -Force
+Start-Service Jenkins
+Get-Service Jenkins
+```
+
 ## Device Setup
 
 Make sure the emulator or physical device is connected:

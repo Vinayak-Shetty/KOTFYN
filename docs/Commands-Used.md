@@ -10,6 +10,8 @@ Common setup, validation, execution, and reporting commands for this Appium Test
 | `appium driver install uiautomator2` | Install the UiAutomator2 driver for Android automation. |
 | `appium driver list` | List installed and available Appium drivers. |
 | `appium` | Start the Appium server before executing mobile tests. |
+| `Start-Process powershell -Verb RunAs` | Open a new Administrator PowerShell window for Jenkins service commands. |
+| `Start-Service Jenkins` | Start the local Jenkins Windows service. Run from Administrator PowerShell. |
 | `adb devices` | Verify that an Android emulator or real device is connected. |
 | `adb shell dumpsys window \| findstr mCurrentFocus` | Find the current Android app package and activity. |
 | `.\mvn.cmd clean test` | Clean the Maven project and run tests. |
