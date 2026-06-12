@@ -31,6 +31,8 @@ pipeline {
     }
 
     environment {
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-21'
+        PATH+JAVA = 'C:\\Program Files\\Java\\jdk-21\\bin'
         OPEN_REPORT = 'false'
         APPIUM_SERVER_URL = "${params.APPIUM_SERVER_URL}"
         DEVICE_NAME = "${params.DEVICE_NAME}"
