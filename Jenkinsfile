@@ -63,7 +63,14 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat ".\\run-test-with-report.cmd ${params.TEST_NAME}"
+                script {
+                    if (params.TEST_NAME == 'RegistrationSmokeTest,LoginSmokeTest') {
+                        bat '.\\run-test-with-report.cmd RegistrationSmokeTest'
+                        bat '.\\run-test-with-report.cmd LoginSmokeTest'
+                    } else {
+                        bat ".\\run-test-with-report.cmd ${params.TEST_NAME}"
+                    }
+                }
             }
         }
     }

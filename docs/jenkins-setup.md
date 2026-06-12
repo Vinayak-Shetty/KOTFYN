@@ -107,6 +107,13 @@ Example single testcase value:
 RegistrationSmokeTest,LoginSmokeTest
 ```
 
+When this value is used, Jenkins runs two commands in order:
+
+```powershell
+.\run-test-with-report.cmd RegistrationSmokeTest
+.\run-test-with-report.cmd LoginSmokeTest
+```
+
 Example single testcase value:
 
 ```text
