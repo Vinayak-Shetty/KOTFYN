@@ -96,10 +96,16 @@ The `Jenkinsfile` supports:
 
 | Parameter | Default | Description |
 | --- | --- | --- |
-| `TEST_NAME` | `LoginSmokeTest` | Test class or single method to run |
+| `TEST_NAME` | `RegistrationSmokeTest,LoginSmokeTest` | Test class, single method, or comma-separated classes to run |
 | `APPIUM_SERVER_URL` | `http://127.0.0.1:4723/` | Appium server URL reachable from Jenkins |
 | `DEVICE_NAME` | `Android Emulator` | Android device name capability |
 | `MANUAL_WAIT_SECONDS` | `30` | Wait time for manual Net Banking, OTP, and MPIN actions |
+
+Example single testcase value:
+
+```text
+RegistrationSmokeTest,LoginSmokeTest
+```
 
 Example single testcase value:
 

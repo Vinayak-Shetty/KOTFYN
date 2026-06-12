@@ -10,8 +10,8 @@ pipeline {
     parameters {
         string(
             name: 'TEST_NAME',
-            defaultValue: 'LoginSmokeTest',
-            description: 'Test class or method, for example LoginSmokeTest or LoginSmokeTest#TC_SMOKE_LOGIN_001_verifyLoginLandingScreenLoadsSuccessfully'
+            defaultValue: 'RegistrationSmokeTest,LoginSmokeTest',
+            description: 'Test class or method. Use RegistrationSmokeTest,LoginSmokeTest to run registration first and login next.'
         )
         string(
             name: 'APPIUM_SERVER_URL',
@@ -36,6 +36,7 @@ pipeline {
         APPIUM_SERVER_URL = "${params.APPIUM_SERVER_URL}"
         DEVICE_NAME = "${params.DEVICE_NAME}"
         REGISTRATION_MANUAL_WAIT_SECONDS = "${params.MANUAL_WAIT_SECONDS}"
+        LOGIN_MANUAL_WAIT_SECONDS = "${params.MANUAL_WAIT_SECONDS}"
     }
 
     stages {

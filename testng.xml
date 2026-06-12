@@ -2,6 +2,7 @@
 <suite name="Mobile Appium Suite" parallel="none">
     <test name="Application Tests">
         <classes>
+            <class name="com.mobile.automation.tests.RegistrationSmokeTest"/>
             <class name="com.mobile.automation.tests.LoginSmokeTest"/>
         </classes>
     </test>
