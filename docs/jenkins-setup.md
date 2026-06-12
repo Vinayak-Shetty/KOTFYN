@@ -114,6 +114,13 @@ When this value is used, Jenkins runs two commands in order:
 .\run-test-with-report.cmd LoginSmokeTest
 ```
 
+Jenkins publishes separate Extent report links for this flow:
+
+```text
+Registration Extent Report
+Login Extent Report
+```
+
 Example single testcase value:
 
 ```text
@@ -144,10 +151,17 @@ ExtentReports are generated under:
 target/extent-reports/<test-name>-<timestamp>/index.html
 ```
 
-In Jenkins, the report is generated under a stable folder:
+In Jenkins, reports are generated under stable per-test folders:
 
 ```text
-target/extent-report/index.html
+target/extent-report/<test-name>/index.html
+```
+
+For the combined registration and login flow, Jenkins publishes:
+
+```text
+target/extent-report/RegistrationSmokeTest/index.html
+target/extent-report/LoginSmokeTest/index.html
 ```
 
 Jenkins archives:

@@ -20,7 +20,7 @@ for /f %%i in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd-HHmmss
 
 set "REPORT_TITLE=Kotak Fyn - %REPORT_ID% - %REPORT_TIMESTAMP%"
 if defined JENKINS_HOME (
-    set "REPORT_DIR_REL=target\extent-report"
+    set "REPORT_DIR_REL=target\extent-report\%REPORT_ID%"
 ) else (
     set "REPORT_DIR_REL=target\extent-reports\%REPORT_ID%-%REPORT_TIMESTAMP%"
 )

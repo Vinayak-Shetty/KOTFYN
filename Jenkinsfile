@@ -83,10 +83,19 @@ pipeline {
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
-                reportDir: 'target/extent-report',
+                reportDir: 'target/extent-report/RegistrationSmokeTest',
                 reportFiles: 'index.html',
-                reportName: 'Extent Report',
-                reportTitles: 'Extent Report'
+                reportName: 'Registration Extent Report',
+                reportTitles: 'Registration Extent Report'
+            ])
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'target/extent-report/LoginSmokeTest',
+                reportFiles: 'index.html',
+                reportName: 'Login Extent Report',
+                reportTitles: 'Login Extent Report'
             ])
         }
     }
